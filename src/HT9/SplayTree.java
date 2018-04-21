@@ -3,7 +3,8 @@ package HT9;
 
 
 /**
-
+ * @author Esteban
+ * @author Antonio
  * @param <E>
  */
 public class SplayTree<E> implements arbol //ya que se usará factory, se necesita que implemente la interfaz arbol 
