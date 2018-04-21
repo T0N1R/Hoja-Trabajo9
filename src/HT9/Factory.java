@@ -15,12 +15,12 @@ class Factory<E> {
     public arbol opcionRealizada(int opcion1){
         switch(opcion1){
             case 1:{
-                elegido = new SplayTree();
+                elegido = new SplayTree<>();
                 break;
             }
             
             case 2:{
-                elegido = (arbol) new RedBlackTree();
+                elegido = new RedBlackTree<>();
                 break;
             }
             

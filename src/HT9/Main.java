@@ -28,7 +28,8 @@ public class Main {
         int opcion1 = scan.nextInt();
         String opcion2 = null;
         
-        factory.opcionRealizada(opcion1);
+        arbol tree;
+        tree = factory.opcionRealizada(opcion1);
         
         
         File words = new File("C:\\Users\\Antonio\\Desktop\\Lab-7-antonio\\Hoja_6_Arboles\\src\\HT9\\palabras");
