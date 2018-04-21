@@ -1,32 +1,35 @@
 
 package HT9;
 /**
- * Clase que demuestra la utilizacion del patron de diseño factory.
- * @author Javier Carpio
- * @author Ana Lucia Hernandez 
+ * 
+ * @author Esteban
+ * @author Antonio
  */
 class Factory<E> {
-    arbol implementacion;
-    /**
-     * Constructor vacio.
-     */
+    
+    arbol elegido;
+
     public Factory(){}
-    /**
-     * Selecciona la implementacion a utilizar para un stack o una lista.
-     * @param entry el tipo de árbol que se desea usar
-     * @return la instanciacion correspondiente
-     */
-   public arbol getTree(String entry) {
-    // seleccion de la implementacion a utilizar:
-        
-        if(entry.equals("Red-Black Tree"))
-        {
-            implementacion =  new RedBlackTree<>();
-        }else if(entry.equals("Splay Tree"))
-        {
-            implementacion = new SplayTree<>();
+
+   
+    public arbol opcionRealizada(int opcion1){
+        switch(opcion1){
+            case 1:{
+                elegido = new SplayTree();
+                break;
+            }
+            
+            case 2:{
+                elegido = (arbol) new RedBlackTree();
+                break;
+            }
+            
+            default:{
+                System.out.println("Esta opcion no es valida");
+                break;
+            }
         }
         
-        return implementacion;      
-   }
+        return elegido;
+    }
 }
