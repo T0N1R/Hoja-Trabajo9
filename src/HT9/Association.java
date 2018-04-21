@@ -1,6 +1,5 @@
-// A class for binding key/value pairs.
-// (c) 1998,2001 duane a. bailey
-package structure;
+
+package HT9;
 import java.util.Map;
 
 /**
