@@ -1,5 +1,5 @@
 
-
+package HT9;
 /**
  * Clase que demuestra la utilizacion del patron de diseño factory.
  * @author Javier Carpio
