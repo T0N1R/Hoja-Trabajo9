@@ -1,6 +1,6 @@
 // A class for binding key/value pairs.
 // (c) 1998,2001 duane a. bailey
-package structure;
+package HT9;
 import java.util.Map;
 
 /**
@@ -31,7 +31,7 @@ public class Association implements Map.Entry
      */
     public Association(Object key, Object value)
     {
-        Assert.pre(key != null, "Key must not be null.");
+       
         theKey = key;
         theValue = value;
     }
