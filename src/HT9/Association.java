@@ -4,35 +4,26 @@
 package HT9;
 import java.util.Map;
 
-/**
- * A class implementing a key-value pair.  This class associates an 
- * immutable key with a mutable value.  Used in many other structures.
- *
- * @version $Id: Association.java 8 2006-08-02 19:03:11Z bailey $
- * @author, 2001 duane a. bailey
- */
-public class Association implements Map.Entry
-{
+public class Association<K, V> implements Map.Entry<K,V>{
     /**
      * The immutable key.  An arbitrary object.
      */
-    protected Object theKey; // the key of the key-value pair
+    protected K theKey; // the key of the key-value pair
     /**
      * The mutable value.  An arbitrary object.
      */
-    protected Object theValue; // the value of the key-value pair
-
+    protected V theValue; // the value of the key-value pair
     /**
      * Constructs a pair from a key and value.
      *
-     * @pre key is non-null
-     * @post constructs a key-value pair
+     * pre key is non-null
+     * post constructs a key-value pair
      * @param key A non-null object.
      * @param value A (possibly null) object.
      */
-    public Association(Object key, Object value)
+    public Association(K key, V value)
     {
-       
+        
         theKey = key;
         theValue = value;
     }
@@ -40,11 +31,11 @@ public class Association implements Map.Entry
     /**
      * Constructs a pair from a key; value is null.
      *
-     * @pre key is non-null
-     * @post constructs a key-value pair; value is null
+     * -pre key is non-null
+     * -post constructs a key-value pair; value is null
      * @param key A non-null key value.
      */
-    public Association(Object key)
+    public Association(K key)
     {
         this(key,null);
     }
@@ -52,11 +43,12 @@ public class Association implements Map.Entry
     /**
      * Standard comparison function.  Comparison based on keys only.
      *
-     * @pre other is non-null Association
-     * @post returns true iff the keys are equal
+     * -pre other is non-null Association
+     * -post returns true if the keys are equal
      * @param other Another association.
-     * @return true iff the keys are equal.
+     * @return true if the keys are equal.
      */
+    @Override
     public boolean equals(Object other)
     {
         Association otherAssoc = (Association)other;
@@ -66,10 +58,11 @@ public class Association implements Map.Entry
     /**
      * Standard hashcode function.
      *
-     * @post return hash code association with this association
+     * -post return hash code association with this association
      * @return A hash code for association.
-     * @see Hashtable
+     * -see Hashtable
      */
+    @Override
     public int hashCode()
     {
         return getKey().hashCode();
@@ -78,10 +71,11 @@ public class Association implements Map.Entry
     /**
      * Fetch value from association.  May return null.
      *
-     * @post returns value from association
+     * -post returns value from association
      * @return The value field of the association.
      */
-    public Object getValue()
+    @Override
+    public V getValue()
     {
         return theValue;
     }
@@ -89,10 +83,11 @@ public class Association implements Map.Entry
     /**
      * Fetch key from association.  Should not return null.
      *
-     * @post returns key from association
+     * -post returns key from association
      * @return Key of the key-value pair.
      */
-    public Object getKey()
+    @Override
+    public K getKey()
     {
         return theKey;
     }
@@ -100,26 +95,15 @@ public class Association implements Map.Entry
     /**
      * Sets the value of the key-value pair.
      *
-     * @post sets association's value to value
+     * -post sets association's value to value
      * @param value The new value.
      */
-    public Object setValue(Object value)
+    @Override
+    public V setValue(V value)
     {
-        Object oldValue = theValue;
+        V oldValue = theValue;
         theValue = value;
         return oldValue;
     }
-
-    /**
-     * Standard string representation of an association.
-     *
-     * @post returns string representation
-     * @return String representing key-value pair.
-     */
-    public String toString()
-    {
-        StringBuffer s = new StringBuffer();
-        s.append("<Association: "+getKey()+"="+getValue()+">");
-        return s.toString();
-    }
+    
 }

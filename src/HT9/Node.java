@@ -1,109 +1,162 @@
 package HT9;
 
-// Implementation of a node of a singly linked list.
-// (c) 1998, 2001 duane a. bailey
-
-/**
- * A class supporting a singly linked list element.  Each element
- * contains a value and maintains a single reference to the next 
- * node in the list.
- *
- * @version $Id: Node.java 31 2007-08-06 17:19:56Z bailey $
- * @author, 2001 duane a. bailey
- */
-public class Node<E>
-{
+public class Node<E> {
+    private Association<String, String> value; // valor del nodo
+    private Node<E> parent; // padre de nodo
+    private Node<E> left, right; // hijos laterales de nodo
+    public boolean color; //se usa solamente para el Red-Black Tree
+    public int size; //se usa solamente para el Red-Black Tree
+    
     /**
-     * The data value stored in this node.
+     * Constructor que crea la raiz. Se utiliza para el SplayTree
+     * @param ingles Palabra en ingles
+     * @param espanol Palabra en espanol
      */
-    protected E data; // value stored in this element
-    /**
-     * Reference to the next node in the list.
-     */
-    protected Node<E> nextElement; // ref to next
-
-    /**
-     * Construct a singly linked list element.
-     *
-     * @pre v is a value, next is a reference to remainder of list
-     * @post an element is constructed as the new head of list
-     * @param v The value to be referenced by this element.
-     * @param next A reference to the next value in the list.
-     */
-    public Node(E v, Node<E> next)
+    public Node(String ingles, String espanol)
     {
-        data = v;
-        nextElement = next;
+        value = new Association<>(ingles, espanol);
+        parent = null; 
+        left = right = null;
+    }
+    
+    /**
+     * Constructor que crea la raiz. Se usa para el Red-Black Tree
+     * @param ingles Palabra en ingles
+     * @param espanol Palabra en espanol
+     * @param color color de nuevo nodo
+     * @param size tamaño del subtree del nodo
+     */
+    public Node(String ingles, String espanol, boolean color, int size)
+    {
+        value = new Association<>(ingles, espanol);
+        parent = null; 
+        left = right = null;
+        this.color = color;
+        this.size = size;
     }
 
     /**
-     * Constructs a node not associated with
-     * any list.  next reference is set to null.
-     *
-     * @post constructs a new tail of a list with value v
-     * 
-     * @param v The value to be inserted into the node.
+     * Constructor que llama el nodo
      */
-    public Node(E v)
-    {
-        this(v,null);
+    public Node() {
+        
     }
-
     /**
-     * @post returns reference to next value in list
-     * 
+     * Obtiene el valor contenido en el nodo.
+     * @return Association : valor que contiene el nodo (un association con la palabra en inglés como key y la de español como value)
      */
-    public Node<E> next()
+    public Association<String, String> getValue()
     {
-        return nextElement;
+        return value; //devuelve la palabra en español
     }
-
-    /**
-     * Update the next element.
-     *
-     * @post sets reference to new next value
-     * 
-     * @param next The new value of the next element reference.
-     */
-    public void setNext(Node<E> next)
+    public void setVal(String nuevo)
     {
-        nextElement = next;
+        this.value.setValue(nuevo);
     }
-
     /**
-     * Fetch the value associated with this element.
-     *
-     * @post returns value associated with this element
-     * 
-     * @return Reference to the value stored within this element.
+     * Obtiene la palabra en español.
+     * @return String palabra en español que contiene el nodo
      */
-    public E value()
+    public String getEspanol()
     {
-        return data;
+        return value.theValue;
     }
-
     /**
-     * Set the value associated with this element.
-     *
-     * @post sets value associated with this element
-     * 
-     * @param value The new value to be associated with this element.
+     * Obtiene la palabra en inglés
+     * @return String palabra en inglés que contiene el nodo
      */
-    public void setValue(E value)
+    public String getKey()
     {
-        data = value;
+        return value.getKey(); //devuelve la palabra en ingles
     }
-
     /**
-     * Construct a string representation of element.
-     *
-     * @post returns string representation of element
-     * 
-     * @return The string representing element.
+     * Obtiene referencia a hijo izquierdo.
+     * @return Node hijo izquierdo del nodo
      */
+    public Node<E> getLeft()
+    {
+        return left;
+    }
+    /**
+     * Obtiene referencia a hijo derecho.
+     * @return Node hijo derecho del nodo
+     */
+    public Node<E> getRight()
+    {
+        return right;
+    }
+    /**
+     * Obtiene referencia a padre
+     * @return Node padre del nodo
+     */
+    public Node<E> getParent()
+    {
+        return parent;
+    }
+    /**
+     * Establece referencia a hijo izquierdo.
+     * @param left: nueva referencia a hijo derecho del nodo
+     */
+    public void setLeft(Node left)
+    {
+        this.left = left;
+    }
+    /**
+     * Establece referencia a hijo derecho.
+     * @param right: nueva referencia a hijo izquierdo del nodo
+     */
+    public void setRight(Node right)
+    {
+        this.right = right;
+    }
+    /**
+     * Establece referencia a padre.
+     * @param newParent: nuevo padre del nodo
+     */
+    public void setParent(Node newParent)
+    // post: re-parents this node to parent reference, or null
+    {
+            parent = newParent;
+    }
+    /**
+     * Obtiene descripción en String del presente objeto.
+     * @return String de los valores que contiene el nodo
+     */
+    @Override
     public String toString()
     {
-        return "<Node: "+value()+">";
+       String hilo = "\t("+ value.theKey + ", " + value.theValue + ")";
+       return hilo;
     }
-}
+    
+    /**
+     * Metodo que busca la palabra en ingles en el arbol creado.
+     * @param value Palabra en ingles a buscar
+     * @return Palabra traducida.
+     */
+    public String search(String value){
+        if (value.equals(this.value.getKey())){
+            
+            return this.value.theValue;
+        }else if (value.compareTo(this.value.getKey()) < 0) {
+            
+            if (left == null){
+                return "*" + value + "*";
+            }else{
+                return left.search(value);
+            }
+        }else if(value.compareTo(this.value.getKey()) > 0) {
+            
+            if (right == null){
+                return "*" + value + "*";
+            }else{
+                return right.search(value);
 
+            }
+        }
+        
+        return "*" + value + "*";
+    }
+    
+    
+}
