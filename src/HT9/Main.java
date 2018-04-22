@@ -18,21 +18,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String [] args) throws FileNotFoundException, IOException{
         
+        boolean salir = true;
+        BufferedReader file = new BufferedReader(new FileReader("newdictionary.txt"));    
+        StringBuilder strng = new StringBuilder();
         Factory factory = new Factory();
         Scanner scan = new Scanner(System.in);
         
-        System.out.println("Desea utilizar Stack o Lista? ");
-        System.out.println("1. ArrayList");
-        System.out.println("2. StackVector");
-        System.out.println("3. Lista");
+        System.out.println("Desea utilizar SplayTree o RedBlackTree? ");
+        System.out.println("1. SplayTree.");
+        System.out.println("2. RedBlackTree.");
+        System.out.println("3. Salir.");
         int opcion1 = scan.nextInt();
         String opcion2 = null;
         
         arbol tree;
         tree = factory.opcionRealizada(opcion1);
         
-        
-        File words = new File("C:\\Users\\Antonio\\Desktop\\Lab-7-antonio\\Hoja_6_Arboles\\src\\HT9\\palabras");
+       while (!salir){
+           
+       } 
+       
+      /*File words = new File("C:\\Users\\Antonio\\Desktop\\Lab-7-antonio\\Hoja_6_Arboles\\src\\HT9\\palabras");
         FileReader read = new FileReader(words);
         BufferedReader buff = new BufferedReader(read);
         
