@@ -19,7 +19,7 @@ public class Main {
     public static void main(String [] args) throws FileNotFoundException, IOException{
         
         boolean salir = true;
-        BufferedReader file = new BufferedReader(new FileReader("newdictionary.txt"));    
+        BufferedReader archivo = new BufferedReader(new FileReader("diccionario.txt"));    
         StringBuilder strng = new StringBuilder();
         Factory factory = new Factory();
         Scanner scan = new Scanner(System.in);
@@ -33,8 +33,9 @@ public class Main {
         
         arbol tree;
         tree = factory.opcionRealizada(opcion1);
+        String linea = null;
         
-       while (!salir){
+       while (linea = archivo.readLine() != null){
            
        } 
        
