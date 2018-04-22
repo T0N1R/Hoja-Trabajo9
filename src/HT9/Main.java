@@ -34,10 +34,30 @@ public class Main {
         arbol tree;
         tree = factory.opcionRealizada(opcion1);
         String linea = null;
+        String iniEspanol = null;
+        String spanish = "";
+        String english = "";
         
-       while (linea = archivo.readLine() != null){
-           
-       } 
+        linea = archivo.readLine();
+        
+        
+        while ((linea = archivo.readLine()) != null){
+            for (int i = 0; i < linea.length(); i++){
+                iniEspanol = linea.substring(i, i + 1).toLowerCase();
+                
+                if (iniEspanol == "\t"){
+                    String caracter = null;
+                    caracter = linea.substring(i, i + 1).toLowerCase();
+                    while (!((caracter == ",") || (caracter == ";") || (caracter == "\n"))){
+                        caracter = linea.substring(i, i + 1).toLowerCase();
+                        spanish = spanish + caracter;
+                    }
+                } else {
+                    english = english + iniEspanol;
+                }
+                tree.put(english, spanish);
+            }
+        } 
        
       /*File words = new File("C:\\Users\\Antonio\\Desktop\\Lab-7-antonio\\Hoja_6_Arboles\\src\\HT9\\palabras");
         FileReader read = new FileReader(words);
