@@ -59,6 +59,19 @@ public class Main {
             }
         } 
        
+        BufferedReader archivoOracion = new BufferedReader(new FileReader("oracion.txt"));
+        String line;
+        while((line = archivoOracion.readLine()) != null ){
+            String[] allWords = line.split(" ");
+            for (int i=0; i<allWords.length; i++){
+                String variable = allWords[i].toLowerCase();
+                if(tree.contains(variable) == true){
+                    System.out.print(tree.get(variable) + " ");
+                }else{
+                    System.out.print("*" + variable + "* ");
+                }
+            }
+        }
       /*File words = new File("C:\\Users\\Antonio\\Desktop\\Lab-7-antonio\\Hoja_6_Arboles\\src\\HT9\\palabras");
         FileReader read = new FileReader(words);
         BufferedReader buff = new BufferedReader(read);
