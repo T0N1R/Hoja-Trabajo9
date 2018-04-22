@@ -40,6 +40,7 @@ public class Main {
         
         linea = archivo.readLine();
         
+        boolean ingresar = false;
         
         while ((linea = archivo.readLine()) != null){
             for (int i = 0; i < linea.length(); i++){
@@ -51,11 +52,15 @@ public class Main {
                     while (!((caracter == ",") || (caracter == ";") || (caracter == "\n"))){
                         caracter = linea.substring(i, i + 1).toLowerCase();
                         spanish = spanish + caracter;
+                        ingresar = true;
                     }
                 } else {
                     english = english + iniEspanol;
                 }
-                tree.put(english, spanish);
+                if (ingresar){
+                    tree.put(english, spanish);
+                    ingresar = false;
+                }
             }
         } 
        
